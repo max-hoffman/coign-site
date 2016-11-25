@@ -1,55 +1,107 @@
 {% extends "bootstrap/base.html" %}
 
+{% block doc %}
 <!DOCTYPE html>
 <html lang = "en">
+{% block html %}
 
 <head>
+{% block head %}
+
 	{% block metas %}
 	<meta charset = "utf-8">
-	<meta name="viewport" content="width=deviec-width, intitial-scale = 1">
+	{{super()}}
 	{% endblock %}
 
-	{% block title %}Coign{% endblock %}
+	{% block styles %}
+		{{super()}}
+	<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/main.css')}}">
+	{% endblock %}
+
+	<title> 
+	{% block title %}
+	Coign
+	{% endblock %}
+	</title>
+
+{% endblock %}
 </head>
 
 <body>
+{% block body %}
 
-<header>
+	<header>
 
-{% block navbar %}
-<div class="container">
-<div class ="row">
-	<nav class="navbar navbar-default">
-		<h1> Coign Social Currency </h1>
-		<ul class = "nav navbar-nav">
-			<li> <a href="#">Home</a> </li>
-			<li> <a href="#">Mission</a> </li>
-			<li> <a href="#">Contact</a> </li>
-		</ul>
-	</nav>
-</div>
-</div>
-{% endblock %}
+	{% block navbar %}
+	<div class="container-fluid">
+		<div class ="row">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="container">
 
-</header>
+					<div class="navbar-header">
+
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+
+						<a class="navbar-brand" href="#">Coign <span class="subhead">Social Currency</span> </a>
+					</div> <!-- navbar-header -->
+
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+						<ul class = "nav navbar-nav navbar-right">
+							<li class="active"> <a href="#home">Home</a> </li>
+							<li> <a href="#mission">Mission</a> </li>
+							<li> <a href="#contact">Contact</a> </li>
+						</ul>
+					</div> <!-- collapse navbar-collapse -->
+
+				</div> <!-- container -->
+			</nav> <!-- navbar -->
+		</div> <!-- row -->
+	</div> <!-- block container -->
+	{{super()}}
+	{% endblock %}  <!-- navbar -->
+
+	</header>
 	
 
-{% block content %}
-<div class="footer container">
-		<div class = "row">
-			<div> Call us at <span class = "phone"> 111-111-1111 </span> </div>
-			<nav>
-				<ul>
-					<li> <a href = "#"> Terms of use </a> </li>
-					<li> <a href = "#"> Private policy </a> </li>
-				</ul>
-			</nav>
-			<p> All content &copy; 2017 Max Hoffman. All rights reserved. </p>
-		</div>	
-</div>
-{% endblock %}
-</div>
+	{% block content %}
 
-</div>
+	<footer>
+	<div class="container-fluid">
+		<div class = "row">
+			<div class="content container-fluid">
+				<div class="col-sm-6">
+					<p> Call us at <span class = "phone"> 111-111-1111 </span> </p>
+					<p> All content &copy; 2017 Max Hoffman. All rights reserved. </p>
+				</div>
+
+				<div class="col-sm-6">
+					<nav class="nav navbar-default" role="navigation">
+						<ul class="nav navbar-nav navbar-right">
+							<li> <a href = "#"> Terms of use </a> </li>
+							<li> <a href = "#"> Private policy </a> </li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>	
+	</div>
+	</footer>
+
+	{{super()}}
+	{% endblock %}  <!-- content -->
+
+
+{% endblock %}  <!-- body -->
 </body>
+
+
+{% endblock %} <!-- html -->
 </html>
+
+
+{% endblock %} <!-- doc -->
