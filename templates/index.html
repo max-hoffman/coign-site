@@ -1,21 +1,20 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<main class="hero-section">
-		<div class = "container">
-			
-			<div class ="section-device">
-				<img src = "static/img/large_logo_3.svg">
-			</div>
+	<div class="main container">
+		<div class = "page row" id = "logo">
 
-			<div class = "section-content">
-				<h1> Discovery a tangible social currency </h1>
-				<a href = "#" class = "btn-primary">Sign up</a>
+			<div class = "col-sm-4">
+				<h1>The social currency for the 21st Century.</h1>
+				<a href = "#" class = "btn-primary">Get the App</a>
 				<a href = "#" class = "btn-secondary">Learn more</a>
 			</div>
 
-			<div class="clearfix"></div>
+			<div class ="col-sm-8">
+				<img src = "static/img/large_logo_3.svg">
+			</div>
 
 		</div>
-	</main>
+	</div>
+{{super()}}
 {% endblock %}

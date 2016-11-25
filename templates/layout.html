@@ -1,18 +1,55 @@
+{% extends "bootstrap/base.html" %}
+
 <!DOCTYPE html>
-<html>
-	<head>
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
-		<link rel="stylesheet" type="text/css" href= "{{ url_for('static', filename = 'css/main.css')}}">
-	</head>
-	<body>
-		<header>
-			<div class = "container">
-				<h1 class = "title"> Learning Flash </h1>
-			</div>
-		</header>
+<html lang = "en">
 
-		{% block content %}
-		{% endblock %}
+<head>
+	{% block metas %}
+	<meta charset = "utf-8">
+	<meta name="viewport" content="width=deviec-width, intitial-scale = 1">
+	{% endblock %}
 
-	</body>
+	{% block title %}Coign{% endblock %}
+</head>
+
+<body>
+
+<header>
+
+{% block navbar %}
+<div class="container">
+<div class ="row">
+	<nav class="navbar navbar-default">
+		<h1> Coign Social Currency </h1>
+		<ul class = "nav navbar-nav">
+			<li> <a href="#">Home</a> </li>
+			<li> <a href="#">Mission</a> </li>
+			<li> <a href="#">Contact</a> </li>
+		</ul>
+	</nav>
+</div>
+</div>
+{% endblock %}
+
+</header>
+	
+
+{% block content %}
+<div class="footer container">
+		<div class = "row">
+			<div> Call us at <span class = "phone"> 111-111-1111 </span> </div>
+			<nav>
+				<ul>
+					<li> <a href = "#"> Terms of use </a> </li>
+					<li> <a href = "#"> Private policy </a> </li>
+				</ul>
+			</nav>
+			<p> All content &copy; 2017 Max Hoffman. All rights reserved. </p>
+		</div>	
+</div>
+{% endblock %}
+</div>
+
+</div>
+</body>
 </html>
