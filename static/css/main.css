@@ -5,3 +5,6 @@
 footer .navbar-default {
   background: transparent;
 }
+.navbar-brand {
+  color: darkgreen;
+}
