@@ -51,11 +51,23 @@
 					</div> <!-- navbar-header -->
 
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
-						<ul class = "nav navbar-nav navbar-right">
-							<li class="active"> <a href="#home">Home</a> </li>
-							<li> <a href="#mission">Mission</a> </li>
-							<li> <a href="#contact">Contact</a> </li>
+
+						{% set navigation_bar = [
+					    ('/', 'index', 'Home'),
+					    ('/mission', 'mission', 'Mission'),
+					    ('/contact', 'contact', 'Contact')
+						] -%}
+
+						{% set active_page = active_page|default('index') -%}
+						
+						<ul class = "nav navbar-nav navbar-right" id="navigation">
+						    {% for href, id, caption in navigation_bar %}
+						    <li{% if id == active_page %} class="active"{% endif%}>
+						    <a href="{{ href|e }}">{{ caption|e }}</a>
+						    </li>
+						{% endfor %}
 						</ul>
+
 					</div> <!-- collapse navbar-collapse -->
 
 				</div> <!-- container -->
@@ -73,7 +85,7 @@
 	<footer>
 	<div class="container-fluid">
 		<div class = "row">
-			<div class="content container-fluid">
+			<div class="content container-fluid navbar-fixed-bottom">
 				<div class="col-sm-6">
 					<p> Call us at <span class = "phone"> 111-111-1111 </span> </p>
 					<p> All content &copy; 2017 Max Hoffman. All rights reserved. </p>
@@ -99,6 +111,13 @@
 {% endblock %}  <!-- body -->
 </body>
 
+{% block scripts %}
+{{super()}}
+<script>
+    $(document).ready(function () {
+    $("#{{request.endpoint}}").parent().addClass("active"); })
+</script>
+{% endblock %} <!-- scripts -->
 
 {% endblock %} <!-- html -->
 </html>

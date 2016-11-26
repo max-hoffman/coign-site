@@ -1,10 +1,12 @@
-
+body {
+	margin-bottom: 70px;
+}
 .navbar {
   border-radius: 0;
 }
 footer .navbar-default {
-  background: transparent;
+  background-color: transparent;
 }
-.navbar-brand {
-  color: darkgreen;
+.navbar-inverse .navbar-brand {
+  color: #028E01;
 }
