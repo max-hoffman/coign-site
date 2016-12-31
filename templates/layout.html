@@ -63,7 +63,8 @@
 					    ('/contact', 'contact', 'Contact')
 						] -%}
 
-						{% set active_page = active_page|default('index') -%}
+						<!-- {% set active_page = active_page|default('index') -%} -->
+						{% set active_page = active_page -%}
 						
 						<ul class = "nav navbar-nav navbar-right" id="navigation">
 						    {% for href, id, caption in navigation_bar %}
@@ -108,8 +109,8 @@
 				<div class="col-sm-6">
 					<nav class="nav navbar-default" role="navigation">
 						<ul class="nav navbar-nav navbar-right">
-							<li> <a href = "#"> Terms of use </a> </li>
-							<li> <a href = "#"> Private policy </a> </li>
+							<li> <a href = "/terms"> Terms of use </a> </li>
+							<li> <a href = "/ppolicy"> Private policy </a> </li>
 						</ul>
 					</nav>
 				</div>
