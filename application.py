@@ -5,7 +5,7 @@ from firebase import firebase
 
 application = Flask(__name__)
 Bootstrap(application)
-
+firebase = firebase.FirebaseApplication('https://coign-dev.firebaseio.com/', None)
 
 @application.route("/")
 def index():
@@ -24,11 +24,10 @@ def post(path):
 	postData = getPost(path)
 	return render_template("post.html", data = postData)
 
-#fb = firebase.firebaseApplication("https://coign-dev.firebaseio.com/", None)
+
 ##firebase data retrieval
 def getPost(postID):
-	#result = firebase.get('/users', postID)
-	result = postID
+	result = firebase.get('/posts', postID)
 	print(result) 
 	return result
 

@@ -2,16 +2,22 @@
 
 
 {% block content %}
-	<div class="main container">
-		<div class = "page row" id = "mission">
+	<div class="main container" id="post">
+		<div class = "page row">
 
 			<div class = "col-sm-8">
-				<div>
-				<h1>Mission</h1>
-				<p> {{ data }} </p>
+				<div class="text-center">
+					<h1>
+						{{ data["recipient name"]}} donated to {{ data["charity"]}}
+					</h1>
+					<blockquote>
+						{{ data["message"] }}
+					</blockquote>
 				</div>
 			</div>
-
+			<div class = "col-sm-4">
+				<img src = "../static/img/small_web_logo.svg" class="img-responsive">
+			</div>
 		</div>
 	</div>
 {{super()}}
