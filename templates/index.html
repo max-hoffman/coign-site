@@ -15,13 +15,13 @@
 				<div class ="col-sm-5 col-md-4 col-lg-4 col-xl-4">
 					<img src = "static/img/small_web_logo.svg">
 
-					<form id="contactForm" role="form">
+					<form id="contactForm" action="{{ url_for('text') }}" method="post">
 	                    <div class="form-group">
 	                        <div class="input-group">
-							   <input type="text" id="phoneNumber" 
+							   <input type="text" name="phoneNumber" 
 	                            placeholder="(651) 555-7889" class="form-control">
 							   <span class="input-group-btn">
-							        <button class="btn btn-default" type="button">Get the iOS App</button>
+							        <button class="btn btn-default" type="submit">Get the iOS App</button>
 							   </span><!-- button span -->
 							</div> <!-- input div -->
 	                    </div> <!-- form div -->
