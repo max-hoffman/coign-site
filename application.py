@@ -7,7 +7,7 @@ import stripe
 
 application = Flask(__name__)
 Bootstrap(application)
-firebase = firebase.FirebaseApplication('https://coign-dev.firebaseio.com/', None)
+fb = firebase.FirebaseApplication('https://coign-dev.firebaseio.com/', None)
 
 # web pages
 @application.route("/")
@@ -76,7 +76,7 @@ def createNewUser():
 
 # show a post
 def getPost(postID):
-	result = firebase.get('/posts', postID)
+	result = fb.get('/posts', postID)
 	print(result) 
 	return result
 
