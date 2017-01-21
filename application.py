@@ -69,7 +69,6 @@ def createNewUser():
 
 	customer = stripe.Customer.create(
 	  description="Customer for" + name,
-	  metadata = ["userID" : userID]
 	)
 
 	return customer
