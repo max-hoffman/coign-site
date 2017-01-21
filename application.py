@@ -67,6 +67,7 @@ def createNewUser():
 	name = request.get('name')
 	userID = request.get('userID')
 
+	print(name + " : " + userID)
 	customer = stripe.Customer.create(
 	  description="Customer for" + name,
 	)
