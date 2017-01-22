@@ -1,13 +1,16 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, json
+from flask_restful import Resource, reqparse, abort, Api, abort
 from flask_bootstrap import Bootstrap
 from firebase import firebase
 from twilio.rest import TwilioRestClient
 import stripe
 
-
 application = Flask(__name__)
+api = Api(application)
+
 Bootstrap(application)
 fb = firebase.FirebaseApplication('https://coign-dev.firebaseio.com/', None)
+stripe.api_key = "sk_test_fqD4n0Wm1j1gPIYlH7R4NQhS"
 
 # web pages
 @application.route("/")
@@ -57,20 +60,42 @@ def text():
 
 	return render_template("index.html")
 
-# stripe endpoints
+
+###### API #########
+
+class HelloWorld(Resource):
+    def get(self):
+        return {'hello': 'world'}
+
+class Customer(Resource):
+	def __init__(self):
+		self.reqparse = reqparse.RequestParser()
+
+	def post(self):
+		args = json.loads(request.data)
+		new = args['new']
+		
+		if new:
+			customer = stripe.Customer.create(description = "test")
+			return (jsonify(customer), 200)
+		else:
+			try:
+				stripeID = args['stripeID']
+				customer = stripe.Customer.retrieve(stripeID)
+				return (jsonify(customer), 200)
+			except stripe.error.StripeError as e:
+				return 'There exists no customer with the given ID', 402
+
+# api endpoints
+api.add_resource(HelloWorld, '/api/hello-world')
+api.add_resource(Customer, '/api/customer')
 
 #new user
 @application.route('/createNewUser', methods = ['POST'])
 def createNewUser():
 
-	stripe.api_key = "sk_test_fqD4n0Wm1j1gPIYlH7R4NQhS"
-	name = request.get('name')
-	userID = request.get('userID')
-
-	print(name + " : " + userID)
-	customer = stripe.Customer.create(
-	  description="Customer for" + name,
-	)
+	customer = stripe.Customer.create(description = "test")
+	print(customer)
 
 	return customer
 
