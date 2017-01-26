@@ -10,9 +10,8 @@ class Customer(Resource):
 		args = json.loads(request.data)
 		new = args['new']
 		
-		return args
 		if new:
-			customer = stripe.Customer.create(description = "test")
+			customer = stripe.Customer.create(description = "test2")
 			return (json.dumps(customer), 200)
 		else:
 			try:
