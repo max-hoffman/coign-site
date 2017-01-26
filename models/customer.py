@@ -9,9 +9,10 @@ class Customer(Resource):
 	def post(self):
 		args = json.loads(request.data)
 		new = args['new']
+		userID = args['userID']
 		
 		if new:
-			customer = stripe.Customer.create(description = "test2")
+			customer = stripe.Customer.create(description = userID)
 			return (json.dumps(customer), 200)
 		else:
 			try:
