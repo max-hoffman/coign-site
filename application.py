@@ -1,11 +1,16 @@
 from flask import Flask, render_template, request, jsonify, json
 from flask_restful import Resource, abort, Api
+from flask_restful.representations.json import output_json
 import logging
 from flask_bootstrap import Bootstrap
 from firebase import firebase
 from twilio.rest import TwilioRestClient
 import stripe
-import models
+from models.createCustomer import CreateCustomer
+from models.retrieveCustomer import RetrieveCustomer
+from models.charge import Charge
+from models.changeDefaultSource import ChangeDefaultSource
+from models.addSource import AddSource
 
 application = Flask(__name__)
 api = Api(application)
@@ -63,7 +68,16 @@ def text():
 
 
 ###### API #########
-class ErrorHandler(Api):
+
+api.add_resource(CreateCustomer, '/api/create-customer')
+api.add_resource(RetrieveCustomer, '/api/retrieve-customer')
+api.add_resource(Charge, '/api/charge')
+api.add_resource(AddSource, '/api/add-source')
+api.add_resource(ChangeDefaultSource, '/api/change-default-source')
+
+# Logging
+
+class Service(Api):
     def handle_error(self, e):
         # Attach the exception to itself so Flask-Restful's error handler
         # tries to render it.
@@ -71,18 +85,20 @@ class ErrorHandler(Api):
             e.data = e
 
         return super(Service, self).handle_error(e)
-api = ErrorHandler(app)
 
-api.add_resource(CreateCustomer, '/api/create-customer')
-api.add_resource(RetrieveCustomer, '/api/retrieve-customer')
-api.add_resource(Charge, '/api/charge')
-api.add_resource(AddSource, '/api/add-source')
-api.add_resource(AddSource, '/api/change-default-source')
+api = Service(application)
 
-# Logging
+@api.representation('application/json')
+def output_json_exception(data, code, *args, **kwargs):
+    """Render exceptions as JSON documents with the exception's message."""
+    if isinstance(data, Exception):
+        data = {'status': code, 'message': str(data)}
+
+    return output_json(data, code, *args, **kwargs)
+
 handler = logging.StreamHandler()
 handler.setLevel(logging.INFO)
-app.logger.addHandler(handler)
+application.logger.addHandler(handler)
 
 # show a post
 def getPost(postID):
@@ -91,4 +107,4 @@ def getPost(postID):
 	return result
 
 if __name__ == "__main__":
-	application.run(debug = True)
+	application.run(debug = False)
