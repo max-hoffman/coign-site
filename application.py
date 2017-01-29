@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, jsonify, json
-from flask_restful import Resource, reqparse, abort, Api
+from flask_restful import Resource, abort, Api
+import logging
 from flask_bootstrap import Bootstrap
 from firebase import firebase
 from twilio.rest import TwilioRestClient
 import stripe
-from models.customer import Customer
+import models
 
 application = Flask(__name__)
 api = Api(application)
@@ -62,14 +63,26 @@ def text():
 
 
 ###### API #########
+class ErrorHandler(Api):
+    def handle_error(self, e):
+        # Attach the exception to itself so Flask-Restful's error handler
+        # tries to render it.
+        if not hasattr(e, 'data'):
+            e.data = e
 
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
+        return super(Service, self).handle_error(e)
+api = ErrorHandler(app)
 
-# api endpoints
-api.add_resource(HelloWorld, '/api/hello-world')
-api.add_resource(Customer, '/api/customer')
+api.add_resource(CreateCustomer, '/api/create-customer')
+api.add_resource(RetrieveCustomer, '/api/retrieve-customer')
+api.add_resource(Charge, '/api/charge')
+api.add_resource(AddSource, '/api/add-source')
+api.add_resource(AddSource, '/api/change-default-source')
+
+# Logging
+handler = logging.StreamHandler()
+handler.setLevel(logging.INFO)
+app.logger.addHandler(handler)
 
 # show a post
 def getPost(postID):
@@ -78,4 +91,4 @@ def getPost(postID):
 	return result
 
 if __name__ == "__main__":
-	application.run(debug = False)
+	application.run(debug = True)
