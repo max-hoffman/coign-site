@@ -1,4 +1,4 @@
-from flask import request, jsonify, json
+from flask import request, json
 from flask_restful import Resource, abort, Api
 import stripe
 

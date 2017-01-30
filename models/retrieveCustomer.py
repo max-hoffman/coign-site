@@ -1,4 +1,4 @@
-from flask import request, json
+from flask import request, json, jsonify
 from flask_restful import Resource, abort, Api
 import stripe
 
@@ -13,7 +13,8 @@ class RetrieveCustomer(Resource):
 		if StripeID is not None:
 			try:
 				customer = stripe.Customer.retrieve(customerID)
-				return (json.dumps(customer), 200)
+				customerObject = json.loads(customer)
+				return jsonify(customer), 200
 			except:
 				return 'Failed to find customer', 402
 		else:
