@@ -1,4 +1,4 @@
-from flask import request, json
+from flask import request, json, jsonify
 from flask_restful import Resource, abort, Api
 import stripe
 
@@ -15,7 +15,7 @@ class CreateCustomer(Resource):
 			if new:
 				try:
 					customer = stripe.Customer.create(description = userID)
-					return (json.dumps(customer), 200)
+					return jsonify(customer), 200
 				except:
 					return 'Failed to create customer', 402
 			else:
