@@ -9,10 +9,11 @@ class RetrieveCustomer(Resource):
 	def post(self):
 		args = json.loads(request.data)
 		customerID = args['stripeID']
-
-		if StripeID is not None:
+		
+		if customerID is not None:
 			try:
-				customer = stripe.Customer.retrieve(customerID)
+				return stripe.Customer.retrieve(customerID)
+				#customer = stripe.Customer.retrieve(customerID)
 				customerObject = json.loads(customer)
 				return jsonify(customer), 200
 			except:

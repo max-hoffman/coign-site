@@ -8,10 +8,6 @@ class CreateCustomer(Resource):
 
 	def post(self):
 
-		customerString = "{\"account_balance\": 0, \"created\": 1485723158, \"currency\": null, \"default_source\": null, \"delinquent\": false, \"description\": \"123456\", \"discount\": null, \"email\": null, \"id\": \"cus_A1Sagqm1XX9tOU\", \"livemode\": false, \"metadata\": {}, \"object\": \"customer\", \"shipping\": null, \"sources\": {\"data\": [], \"has_more\": false, \"object\": \"list\", \"total_count\": 0, \"url\": \"/v1/customers/cus_A1Sagqm1XX9tOU/sources\"}, \"subscriptions\": {\"data\": [], \"has_more\": false, \"object\": \"list\", \"total_count\": 0, \"url\": \"/v1/customers/cus_A1Sagqm1XX9tOU/subscriptions\"}}"
-		customerObject = json.loads(customerString)
-		return jsonify(customerObject)
-
 		args = json.loads(request.data)
 		new = args['new']
 		userID = args['userID']
@@ -19,7 +15,8 @@ class CreateCustomer(Resource):
 		if userID is not None:
 			if new:
 				try:
-					customer = stripe.Customer.create(description = userID)
+					return stripe.Customer.create(description = userID)
+					#customer = stripe.Customer.create(description = userID)
 					customerObject = json.loads(customer)
 					return jsonify(customerObject), 200
 				except:
