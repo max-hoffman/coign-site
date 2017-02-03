@@ -12,10 +12,10 @@ class RetrieveCustomer(Resource):
 		
 		if customerID is not None:
 			try:
-				return stripe.Customer.retrieve(customerID)
-				#customer = stripe.Customer.retrieve(customerID)
+				#return stripe.Customer.retrieve(customerID), 200
+				customer = stripe.Customer.retrieve(customerID)
 				customerObject = json.loads(customer)
-				return jsonify(customer), 200
+				return jsonify(customerObject), 200
 			except:
 				return 'Failed to find customer', 402
 		else:
