@@ -11,7 +11,7 @@ class ChangeDefaultSource(Resource):
 		try:
 			stripeID = args['stripeID']
 			source = args['source']		   
-			customer = stripe.Customer.retrieve(customer_id)
+			customer = stripe.Customer.retrieve(stripeID)
 			customer.default_source = source
 			customer.save()
 			return 'Success', 200
