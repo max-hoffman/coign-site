@@ -11,6 +11,7 @@ class RetrieveCustomer(Resource):
 		customerID = args['stripeID']
 
 		customer = stripe.Customer.retrieve(customerID)
+		print(customer)
 		customerObject = json.loads(customer)
 		return jsonify(customerObject), 200
 
