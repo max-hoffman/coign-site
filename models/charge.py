@@ -8,16 +8,16 @@ class Charge(Resource):
 
 	def post(self):
 		args = json.loads(request.data)
-		token = args["token"]
+		source = args["source"]
 		userID = args["userID"]
 
 		if token is not None:
 			try:
 				charge = stripe.Charge.create(
-				  amount=1000,
+				  amount=100,
 				  currency="usd",
 				  description="Donation from  {0}".format(userID),
-				  source=token,
+				  source=source,
 				)
 				return 'Payment success', 200
 			except:
