@@ -16,7 +16,7 @@ class RetrieveCustomer(Resource):
 				customer = stripe.Customer.retrieve(customerID)
 				customerObject = json.loads(customer)
 				return jsonify(customerObject), 200
-			except:
-				return 'Failed to find customer', 402
+			except Exception as e: 
+				return str(e) 
 		else:
 			return 'Did not provide customer ID', 402
