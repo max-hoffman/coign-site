@@ -14,12 +14,7 @@ class RetrieveCustomer(Resource):
 			try:
 				customer = stripe.Customer.retrieve(customerID)
 				loadedCustomer = json.loads(str(customer))
-				print(loadedCustomer)
-				return loadedCustomer
-				#return stripe.Customer.retrieve(customerID), 200
-				# customer = stripe.Customer.retrieve(customerID)
-				# customerObject = json.loads(customer)
-				# return jsonify(customerObject), 200
+				return loadedCustomer, 200
 			except Exception as e: 
 				return str(e) 
 		else:

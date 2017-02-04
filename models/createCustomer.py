@@ -16,9 +16,6 @@ class CreateCustomer(Resource):
 			if new:
 				try:
 					return stripe.Customer.create(description = userID)
-					#customer = stripe.Customer.create(description = userID)
-					customerObject = json.loads(customer)
-					return jsonify(customerObject), 200
 				except:
 					return 'Failed to create customer', 402
 			else:

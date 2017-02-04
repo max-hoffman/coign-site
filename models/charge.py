@@ -11,7 +11,7 @@ class Charge(Resource):
 		source = args["source"]
 		userID = args["userID"]
 
-		if token is not None:
+		if source is not None:
 			try:
 				charge = stripe.Charge.create(
 				  amount=100,
