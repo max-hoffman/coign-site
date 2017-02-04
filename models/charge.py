@@ -10,14 +10,16 @@ class Charge(Resource):
 		args = json.loads(request.data)
 		source = args["source"]
 		userID = args["userID"]
+		customerID = args["customerID"]
 
 		if source is not None:
 			try:
 				charge = stripe.Charge.create(
-				  amount=100,
-				  currency="usd",
-				  description="Donation from {0}".format(userID),
-				  source=source,
+				  amount = 100,
+				  currency = "usd",
+				  description = "Donation from {0}".format(userID),
+				  customer = customerID,
+				  source = source,
 				)
 				return 'Payment success', 200
 			except stripe.error.CardError, e:
