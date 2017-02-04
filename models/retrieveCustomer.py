@@ -13,21 +13,9 @@ class RetrieveCustomer(Resource):
 		if customerID is not None:
 			try:
 				customer = stripe.Customer.retrieve(customerID)
-				print(customer)
-
-				for key in customer.keys():
-				  if type(key) is not str:
-				    try:
-				      customer[str(key)] = customer[key]
-				    except:
-				      try:
-				        customer[repr(key)] = customer[key]
-				      except:
-				        pass
-				    del customer[key]
-
-				print(customer)
-				return customer
+				loadedCustomer = json.loads(customer) 
+				print(loadedCustomer)
+				return loadedCustomer
 				#return stripe.Customer.retrieve(customerID), 200
 				# customer = stripe.Customer.retrieve(customerID)
 				# customerObject = json.loads(customer)
