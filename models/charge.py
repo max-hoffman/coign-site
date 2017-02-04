@@ -20,14 +20,13 @@ class Charge(Resource):
 				  description = "Donation from {0}".format(userID),
 				  customer = customerID,
 				  source = source,
-				  statement_description = "Donation to Coign"
+				  statement_descriptor = "Donation to Coign"
 				)
 				return 'Payment success', 200
 			except stripe.error.CardError, e:
-				print(e)
-				return e, 500
+				return {"result" : e}, 500
 			except Exception as e:
 				print(e)
-			return e, 500
+			return {"result" : e}, 500
 		else:
 			return 'No token provided', 402
