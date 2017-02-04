@@ -13,7 +13,7 @@ class RetrieveCustomer(Resource):
 		if customerID is not None:
 			try:
 				customer = stripe.Customer.retrieve(customerID)
-				loadedCustomer = json.loads(customer) 
+				loadedCustomer = json.loads(str(customer))
 				print(loadedCustomer)
 				return loadedCustomer
 				#return stripe.Customer.retrieve(customerID), 200
