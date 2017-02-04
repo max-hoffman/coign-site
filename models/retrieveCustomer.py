@@ -10,18 +10,12 @@ class RetrieveCustomer(Resource):
 		args = json.loads(request.data)
 		customerID = args['stripeID']
 
-		customer = stripe.Customer.retrieve(customerID)
-		
-		return str(customer)
-		customerObject = json.loads(customer)
-		return jsonify(customerObject), 200
-
 		if customerID is not None:
 			try:
-				#return stripe.Customer.retrieve(customerID), 200
-				customer = stripe.Customer.retrieve(customerID)
-				customerObject = json.loads(customer)
-				return jsonify(customerObject), 200
+				return stripe.Customer.retrieve(customerID), 200
+				# customer = stripe.Customer.retrieve(customerID)
+				# customerObject = json.loads(customer)
+				# return jsonify(customerObject), 200
 			except Exception as e: 
 				return str(e) 
 		else:
