@@ -20,6 +20,7 @@ class Charge(Resource):
 				  description = "Donation from {0}".format(userID),
 				  customer = customerID,
 				  source = source,
+				  statement_description = "Donation to Coign"
 				)
 				return 'Payment success', 200
 			except stripe.error.CardError, e:
