@@ -16,10 +16,16 @@ class Charge(Resource):
 				charge = stripe.Charge.create(
 				  amount=100,
 				  currency="usd",
-				  description="Donation from  {0}".format(userID),
+				  description="Donation from {0}".format(userID),
 				  source=source,
 				)
 				return 'Payment success', 200
+			except stripe.error.CardError, e:
+				print(e)
+            	return e, 500
+        	except Exception as e:
+        		print(e)
+	            return e, 500
 			except:
 				return 'Invalid token provided', 402
 		else:
