@@ -13,15 +13,15 @@
 
 				<div class = "col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 col-xl-3 col-xl-offset-3">
 				<h1 class="text-center"> <strong> COMING SOON </strong> </h1>
-					<h1 class="text-center"> <strong> A Pro-Social Dislike Button </strong> </h1>
-					<h2 class="text-center">Thank or annoy others with a simple donation in their name</h2>
+					<h1 class="text-center"> <strong>Embed donations into social media.</strong> </h1>
+					<!-- <h2 class="text-center">A dollar donation embedded in media does what likes, comments, shares and favorites cannot: represent substantial action in the real-world. If you are worried about a cause, fake-news, or some other threat or hate-speech, Coign succeeds where symbols fail.</h2> -->
 				</div>
 
 
 				<div class ="col-sm-5 col-md-4 col-lg-4 col-xl-4">
 					<img src = "static/img/small_web_logo.svg">
 
-					<form id="contactForm" action="/api/text" method="post">
+					<form id="contactForm" action="{{ url_for('text') }}" method="post">
 	                    <div class="form-group">
 	                        <div class="input-group">
 							   <input type="text" name="phoneNumber" 
@@ -36,6 +36,8 @@
 			</div> <!-- row div -->
 
 			
+				<p class="text-center">A dollar donation embedded in media does what likes, comments, shares and favorites cannot: substantial action in the real-world. If you are worried about a cause, fake-news, or some other threat or hate-speech, Coign succeeds where symbols fail.</p>
+
 
 		</div> <!-- jumbotron div -->
 	</div> <!-- main page div -->

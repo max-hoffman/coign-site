@@ -26,7 +26,6 @@ class Charge(Resource):
 			except stripe.error.CardError, e:
 				return {"result" : e}, 500
 			except Exception as e:
-				print(e)
-			return {"result" : e}, 500
+				return {"result" : e}, 500
 		else:
 			return 'No token provided', 402

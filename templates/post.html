@@ -1,5 +1,18 @@
 {% extends "layout.html" %}
 
+{% block head %}
+
+	{% block metas %}
+	<meta property="og:title" content="{0} Donation".format({{data["charity"]}})/>
+	<meta property="og:description" content="Congratulations, {0}, for donating 1$ to {1} with Coign!"/>
+	<!-- <meta property="og:image" content="YOURIMAGEURLGOESHERE.JPG"> -->
+	<meta property="og:url" content="https://www.coign.co">
+	<meta property="og:type" content="website"/>
+	{{super()}}
+	{% endblock %}
+
+
+{% endblock %}
 
 {% block content %}
 	<div class="main container" id="post">
