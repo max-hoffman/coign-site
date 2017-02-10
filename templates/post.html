@@ -3,11 +3,10 @@
 {% block head %}
 
 	{% block metas %}
-	<meta property="og:title" content="{0} Donation".format({{data["charity"]}})/>
-	<meta property="og:description" content="Congratulations, {0}, for donating 1$ to {1} with Coign!"/>
-	<!-- <meta property="og:image" content="YOURIMAGEURLGOESHERE.JPG"> -->
-	<meta property="og:url" content="https://www.coign.co">
-	<meta property="og:type" content="website"/>
+	{% for key, item in metadata %}
+       <meta property="{{ key }}" content="{{ item }}" />
+    {% endfor %}
+	
 	{{super()}}
 	{% endblock %}
 

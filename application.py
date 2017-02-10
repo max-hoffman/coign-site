@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, json
+from flask import Flask, render_template, request, jsonify, json, send_file
 from flask_restful import Resource, abort, Api
 from flask_restful.representations.json import output_json
 import logging
@@ -12,12 +12,17 @@ from models.charge import Charge
 from models.changeDefaultSource import ChangeDefaultSource
 from models.addSource import AddSource
 
+##############################################################################
+##############################################################################
+
 application = Flask(__name__)
 api = Api(application)
 
 Bootstrap(application)
 fb = firebase.FirebaseApplication('https://coign-dev.firebaseio.com/', None)
 
+##############################################################################
+##############################################################################
 # web pages
 @application.route("/")
 def index():
@@ -39,11 +44,32 @@ def terms():
 def ppolicy():
 	return render_template("ppolicy.html")
 
-#should this be a GET?
+##############################################################################
+##############################################################################
+
+# render post page
 @application.route("/posts/<path>")
 def post(path):
 	postData = getPost(path)
-	return render_template("post.html", data = postData)
+	metadata = {"og:description" : "{0} Donation".format(postData["charity"]),
+	 			"og:title" : "{0} donated $1 to {1} with Coign!".format(postData["recipient name"],postData["charity"])
+	 			}
+	return render_template("post.html", data = postData, metadata = metadata)
+
+# get images
+@application.route('/return-image/favicon')
+def returnIcon():
+	try:
+		return send_file("static/img/small_web_logo.svg", attachment_filename='coign-icon.svg')
+	except Exception as e:
+		return str(e)
+
+@application.route('/return-image/logo')
+def returnLogo():
+	try:
+		return send_file('static/img/large_logo_3.svg', attachment_filename='coign-logo.svg')
+	except Exception as e:
+		return str(e)
 
 # send text
 @application.route('/text', methods=['POST'])
@@ -66,8 +92,9 @@ def text():
 
 	return render_template("index.html")
 
-
-###### API #########
+##############################################################################
+##############################################################################
+###### API
 
 api.add_resource(CreateCustomer, '/api/create-customer')
 api.add_resource(RetrieveCustomer, '/api/retrieve-customer')
@@ -75,7 +102,8 @@ api.add_resource(Charge, '/api/charge')
 api.add_resource(AddSource, '/api/add-source')
 api.add_resource(ChangeDefaultSource, '/api/change-default-source')
 
-
+##############################################################################
+##############################################################################
 # Logging
 
 class Service(Api):
@@ -101,11 +129,16 @@ handler = logging.StreamHandler()
 handler.setLevel(logging.INFO)
 application.logger.addHandler(handler)
 
+##############################################################################
+##############################################################################
 # show a post
 def getPost(postID):
 	result = fb.get('/posts', postID)
 	print(result) 
 	return result
 
+##############################################################################
+##############################################################################
 if __name__ == "__main__":
-	application.run(debug = True)
+	application.run(debug = False)
+
