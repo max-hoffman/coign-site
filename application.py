@@ -60,7 +60,7 @@ def post(path):
 @application.route('/return-image/favicon')
 def returnIcon():
 	try:
-		return send_file("static/img/small_web_logo.svg", attachment_filename='coign-icon.svg')
+		return send_file("static/img/favicon.ico", attachment_filename='coign-icon.svg')
 	except Exception as e:
 		return str(e)
 

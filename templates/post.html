@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 
+
+<title> 
+{% block title %}
+Coign - {{ data["recipient name"]}}'s donation to {{ data["charity"]}}
+{% endblock %}
+</title>
+
 {% block head %}
 
 	{% block metas %}
