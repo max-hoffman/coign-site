@@ -54,7 +54,7 @@ def post(path):
 	metadata = {"og:description" : "{0} Donation".format(postData["charity"]),
 	 			"og:title" : "{0} donated $1 to {1} with Coign!".format(postData["recipient name"],postData["charity"])
 	 			}
-	return render_template("post.html", data = postData, metadata = metadata)
+	return render_template("post.html", data = postData)
 
 # get images
 @application.route('/return-image/favicon')
@@ -140,5 +140,5 @@ def getPost(postID):
 ##############################################################################
 ##############################################################################
 if __name__ == "__main__":
-	application.run(debug = False)
+	application.run(debug = True)
 

@@ -3,14 +3,14 @@
 {% block head %}
 
 	{% block metas %}
-	{% for key, item in metadata %}
-       <meta property="{{ key }}" content="{{ item }}" />
+	{% for key in metadata %}
+       <meta property="{{ metadata[key] }}" content="{{ metadata[key] }}" />
     {% endfor %}
 	
 	{{super()}}
 	{% endblock %}
 
-
+{{ super() }}
 {% endblock %}
 
 {% block content %}
@@ -32,5 +32,5 @@
 			</div>
 		</div>
 	</div>
-{{super()}}
+{{ super() }}
 {% endblock %}
