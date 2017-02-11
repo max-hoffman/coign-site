@@ -11,7 +11,7 @@ Coign - {{ data["recipient name"]}} donated to {{ data["charity"]}}
 
 	{% block metas %}
 	{% for key, value in metadata.iteritems() %}
-       <meta property="{{ metadata[key] }}" content="{{ metadata[value] }}" />
+       <meta property="{{ key }}" content="{{ value }}" />
     {% endfor %}
 	
 	{{super()}}
