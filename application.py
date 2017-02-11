@@ -71,10 +71,10 @@ def returnLogo():
 	except Exception as e:
 		return str(e)
 
-@application.route('/return-image/preview-icon')
-def returnPreview():
+@application.route('/return-image/small-logo')
+def returnSmallLogo():
 	try:
-		return send_file('static/img/small_web_logo.svg', attachment_filename='preview_icon.svg')
+		return send_file('static/img/small_web_logo.svg', attachment_filename='small-logo.svg')
 	except Exception as e:
 		return str(e)
 
