@@ -71,6 +71,13 @@ def returnLogo():
 	except Exception as e:
 		return str(e)
 
+@application.route('/return-image/preview-icon')
+def returnPreview():
+	try:
+		return send_file('static/img/preview_icon.png', attachment_filename='preview_icon.png')
+	except Exception as e:
+		return str(e)
+
 # send text
 @application.route('/text', methods=['POST'])
 def text():
