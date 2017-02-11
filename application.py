@@ -51,8 +51,8 @@ def ppolicy():
 @application.route("/posts/<path>")
 def post(path):
 	postData = getPost(path)
-	metadata = {"og:description" : postData["message"][:100],
-	 			"og:title" : "{0} donated $1 to {1} with Coign!".format(postData["recipient name"],postData["charity"])
+	metadata = {"og:title" : "No amount of Likes make a Right",
+	 			"og:description" : "{0} donation $1 to {1} with Coign!".format(postData["recipient name"],postData["charity"])
 	 			}
 	return render_template("post.html", data = postData, metadata = metadata)
 
@@ -140,5 +140,5 @@ def getPost(postID):
 ##############################################################################
 ##############################################################################
 if __name__ == "__main__":
-	application.run(debug = True)
+	application.run(debug = False)
 
