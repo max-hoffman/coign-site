@@ -74,7 +74,7 @@ def returnLogo():
 @application.route('/return-image/preview-icon')
 def returnPreview():
 	try:
-		return send_file('static/img/preview_icon.png', attachment_filename='preview_icon.png')
+		return send_file('static/img/small_web_logo.svg', attachment_filename='preview_icon.svg')
 	except Exception as e:
 		return str(e)
 
